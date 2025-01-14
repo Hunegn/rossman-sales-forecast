@@ -1,0 +1,5 @@
+outs:
+- md5: 623dc88ba34abecaa8b20dcac1271516
+  size: 443631059
+  hash: md5
+  path: sales_model_2025-01-09-01-27-25.pkl
