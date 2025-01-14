@@ -10,7 +10,7 @@ from datetime import datetime
 import joblib
 import logging
 
-# Configure logging
+
 logging.basicConfig(
     filename="store_sales_prediction.log",
     level=logging.INFO,
@@ -50,7 +50,7 @@ class StoreSalesPrediction:
             logging.info(f"Test data loaded with shape: {self.test_data.shape}")
             logging.info(f"Store data loaded with shape: {self.store_data.shape}")
 
-            # Merging store data with training and test data
+            
             logging.info("Merging train and test data with store data...")
             self.train_data = self.train_data.merge(self.store_data, on="Store", how="left")
             self.test_data = self.test_data.merge(self.store_data, on="Store", how="left")
@@ -68,19 +68,19 @@ class StoreSalesPrediction:
         """
         logging.info("Preprocessing data...")
 
-        # Handle datetime
+       
         data['Date'] = pd.to_datetime(data['Date'])
         data['Weekday'] = data['Date'].dt.weekday
         data['IsWeekend'] = data['Weekday'].isin([5, 6]).astype(int)
         data['Month'] = data['Date'].dt.month
         data['Year'] = data['Date'].dt.year
 
-        # Feature Engineering
+    
         data['DaysToHoliday'] = data['Date'].apply(self._days_to_holiday)
         data['DaysAfterHoliday'] = data['Date'].apply(self._days_after_holiday)
         data['MonthPhase'] = data['Date'].dt.day.apply(self._month_phase)
 
-        # Handle missing values
+        
         data.fillna({
             'CompetitionDistance': data['CompetitionDistance'].median(),
             'Promo2SinceWeek': 0,
@@ -91,11 +91,11 @@ class StoreSalesPrediction:
 
     def _days_to_holiday(self, date):
         """Dummy function for days to holiday calculation."""
-        return 0  # Replace with actual logic
+        return 0  
 
     def _days_after_holiday(self, date):
         """Dummy function for days after holiday calculation."""
-        return 0  # Replace with actual logic
+        return 0  
 
     def _month_phase(self, day):
         """Categorize a day into beginning, middle, or end of the month."""
